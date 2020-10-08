@@ -9,6 +9,8 @@ import Foundation
 
 class CalculatorViewController: UIViewController, UITextFieldDelegate {
 
+    var tipBrain = TipBrain()
+    
     @IBOutlet weak var billTextField: UITextField!
     @IBOutlet weak var tenPctButton: UIButton!
     @IBOutlet weak var twentyPctButton: UIButton!
@@ -17,19 +19,15 @@ class CalculatorViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var splitNumberLabel: UILabel!
     
     @IBOutlet weak var taxTextField: UITextField!
-    
-    
-    var calculatedSplit: String?
-    var tipPercent: String?
-    var tax: Float?
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         customPctButton.delegate = self
     }
-    //change higlighted tip button when it becomes selected
+    
+    //change higlighted button when it becomes selected
     @IBAction func tipChanged(_ sender: UIButton) {
         
         billTextField.endEditing(true)
@@ -49,15 +47,16 @@ class CalculatorViewController: UIViewController, UITextFieldDelegate {
         
     }
     
-    //change highlighted tip button when UITextField is selected
+    //change highlighted button when UITextField is selected
     @IBAction func customPressed(_ sender: UITextField) {
 
-                customPctButton.text = sender.text! 
-                tenPctButton.isSelected = false
-                twentyPctButton.isSelected = false
+        customPctButton.text = sender.text! 
+        tenPctButton.isSelected = false
+        twentyPctButton.isSelected = false
                         
     }
     
+    //change splitNumber label when stepper value is changed
     @IBAction func stepperValueChanged(_ sender: UIStepper) {
         
         //adjust split number text according to sender value
@@ -66,38 +65,21 @@ class CalculatorViewController: UIViewController, UITextFieldDelegate {
     
     //calculate tip according to percentage selected and split number
     @IBAction func calculatePressed(_ sender: UIButton) {
-        
-        tax = Float(billTextField.text!)! * (Float(taxTextField.text!)!/100)
-        
+                
+        //calculate bill using tipbrain, depends on tip percentage button selected.
         if tenPctButton.isSelected == true {
             
-            //(bill+(bill*.10))/splitNumber
-            calculatedSplit = String(format: "%.2f" , (Float(billTextField.text!)! + tax! + (Float(billTextField.text!)! * 0.1))/Float(splitNumberLabel.text!)!)
-        
-            tipPercent = "10%"
-            
-            print(calculatedSplit ?? "split not calculated")
-            
+            tipBrain.calculateBill(Float(billTextField.text!)!, Float(taxTextField.text!)!,10, Float(splitNumberLabel.text!)!)
             
         }
         else if twentyPctButton.isSelected == true {
            
-            //(bill+(bill*.20))/splitNumber
-            calculatedSplit = String(format: "%.2f", (Float(billTextField.text!)! + tax! + (Float(billTextField.text!)! * 0.2))/Float(splitNumberLabel.text!)!)
-            
-            tipPercent = "20%"
-            
-            print(calculatedSplit ?? "split not calculated")
+            tipBrain.calculateBill(Float(billTextField.text!)!, Float(taxTextField.text!)!,20, Float(splitNumberLabel.text!)!)
 
         }
         else {
             
-            //(bill+(bill*.custom tip %))/splitNumber
-            calculatedSplit = String(format: "%.2f", (Float(billTextField.text!)! + tax! + (Float(billTextField.text!)! * Float(customPctButton.text!.prefix(2))! * 0.01))/Float(splitNumberLabel.text!)!)
-            
-            print(calculatedSplit ?? "split not calculated")
-            
-            tipPercent = customPctButton.text ?? "no custom tip selected"
+            tipBrain.calculateBill(Float(billTextField.text!)!, Float(taxTextField.text!)!,Float(customPctButton.text!)!, Float(splitNumberLabel.text!)!)
 
         }
         
@@ -116,10 +98,10 @@ class CalculatorViewController: UIViewController, UITextFieldDelegate {
             //by using as! which is essentially downcasting
             let destinationVC = segue.destination as! ResultsViewController
             
-            destinationVC.totalBill = calculatedSplit ?? "total unavailable"
-            destinationVC.splitNumber = splitNumberLabel.text ?? "split amount not available"
-            destinationVC.tipPercent = tipPercent ?? "tip percent not available"
-            destinationVC.tax = taxTextField.text ?? "tax n/a"
+            destinationVC.totalBill = tipBrain.getFinalTotal()
+            destinationVC.splitNumber = tipBrain.getSplitNumber()
+            destinationVC.tipPercent = tipBrain.getTip()
+            destinationVC.tax = tipBrain.getTax()
             
         }
     }

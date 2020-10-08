@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B2774EE252EA8C5005A209D /* TipBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2774ED252EA8C5005A209D /* TipBrain.swift */; };
+		8B2774F5252EA92E005A209D /* Bill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2774F4252EA92E005A209D /* Bill.swift */; };
 		8BCF98E1252BBDBA0018DCF6 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCF98E0252BBDBA0018DCF6 /* ResultsViewController.swift */; };
 		ADB689532326708D006D4E2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB689522326708D006D4E2B /* AppDelegate.swift */; };
 		ADB689552326708D006D4E2B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB689542326708D006D4E2B /* SceneDelegate.swift */; };
@@ -17,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8B2774ED252EA8C5005A209D /* TipBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipBrain.swift; sourceTree = "<group>"; };
+		8B2774F4252EA92E005A209D /* Bill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bill.swift; sourceTree = "<group>"; };
 		8BCF98E0252BBDBA0018DCF6 /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 		ADB6894F2326708D006D4E2B /* Tipsy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tipsy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADB689522326708D006D4E2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -39,6 +43,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8B2774EC252EA81D005A209D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8B2774ED252EA8C5005A209D /* TipBrain.swift */,
+				8B2774F4252EA92E005A209D /* Bill.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		8B2774F7252ED4F2005A209D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				ADB689582326708D006D4E2B /* Main.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		8BCF98E3252BBDDE0018DCF6 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -67,10 +88,11 @@
 		ADB689512326708D006D4E2B /* Tipsy */ = {
 			isa = PBXGroup;
 			children = (
+				8B2774EC252EA81D005A209D /* Models */,
+				8B2774F7252ED4F2005A209D /* Views */,
+				8BCF98E3252BBDDE0018DCF6 /* Controllers */,
 				ADB689522326708D006D4E2B /* AppDelegate.swift */,
 				ADB689542326708D006D4E2B /* SceneDelegate.swift */,
-				8BCF98E3252BBDDE0018DCF6 /* Controllers */,
-				ADB689582326708D006D4E2B /* Main.storyboard */,
 				ADB6895B2326708E006D4E2B /* Assets.xcassets */,
 				ADB6895D2326708E006D4E2B /* LaunchScreen.storyboard */,
 				ADB689602326708E006D4E2B /* Info.plist */,
@@ -153,6 +175,8 @@
 				ADB689532326708D006D4E2B /* AppDelegate.swift in Sources */,
 				ADB689552326708D006D4E2B /* SceneDelegate.swift in Sources */,
 				8BCF98E1252BBDBA0018DCF6 /* ResultsViewController.swift in Sources */,
+				8B2774F5252EA92E005A209D /* Bill.swift in Sources */,
+				8B2774EE252EA8C5005A209D /* TipBrain.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
